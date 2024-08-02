@@ -15,6 +15,32 @@ function addHiddenField(form, name, value) {
     form.appendChild(input);
 }
 
+function locTime(){
+    const now = new Date();
+        
+    // Get the current time in UTC
+    
+    const utcHours = now.getUTCHours();
+    const utcMinutes = now.getUTCMinutes();
+    
+    // Calculate the time in PKT
+    const pktHours = (utcHours + 5) % 24; // Wrap around to handle hour overflow
+    const pktDate = new Date(now);
+    pktDate.setUTCHours(pktHours);
+    pktDate.setUTCMinutes(utcMinutes);
+    
+    
+    // Format the date and time for PKT
+    const year = pktDate.getUTCFullYear();
+    const month = String(pktDate.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(pktDate.getUTCDate()).padStart(2, '0');
+    const hours = String(pktDate.getUTCHours()).padStart(2, '0');
+    const minutes = String(pktDate.getUTCMinutes()).padStart(2, '0');
+    
+    const pktFormattedString = `${year}-${month}-${day}  ${hours}:${minutes} `;
+    return pktFormattedString;
+}
+
 // Function to update cart page
 function updateCartPage() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -150,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('cart.html')) {
         // console.log(location.pathname);
         updateCartPage();
+        // console.log(locTime());
 
         // Handle form submission
         
@@ -165,10 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 let orderTotal=0;
                 cartItems.forEach(item => {
                     order.push([item.name, item.flavors, item.price])
-                    orderTotal += item.price;
+                    orderTotal += Number(item.price);
                 });
                 // order.push(["Total",orderTotal]);
                 // console.log(order);
+                orderTotal += 200;
     
     
                 // Collect form data
@@ -177,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 addHiddenField(form, 'cartItems', formData);
                 addHiddenField(form, 'total', orderTotal);
+                addHiddenField(form, 'time', locTime());
         
         
                 fetch(scriptURL, {

@@ -47,8 +47,8 @@ header nav a:hover {
 }
 #cart-count{
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -0.7em;
+    right: -0.7em;
     background-color: #444;
     color: white;
     border-radius: 50%;
@@ -99,14 +99,17 @@ header nav a:hover {
 }
 
 .box{
+    box-sizing: border-box;
     padding: 1em;
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .checkout-container{
-    width:50%;
+    width:60%;
     padding: 3em;
+    box-sizing: border-box;
 
 }
 .menu {
@@ -156,8 +159,9 @@ header nav a:hover {
 .cart-container{
     padding:1.7em;
     margin: 0 0 1em auto;
-    width:25%;
+    width:30%;
     background:#ccc;
+    box-sizing: border-box;
 }
 .cc{
     text-align:right;
@@ -295,6 +299,14 @@ header nav a:hover {
     }
     .dropdown-content a{
         text-align:center;
+    }
+    .box{
+        flex-direction: column;
+    }
+    .cart-container, .checkout-container{
+        width:100%;
+        margin: 0;
+        padding: 1em;
     }
    
 
