@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Order Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="dropdown">
+                <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+                <!-- Dropdown Menu -->
+                <div class="dropdown-content">
+                    <a href="index.html">Main</a>
+                    <a href="order.html">Menu</a>
+                </div>
+            </div>
+            <div class="title">THE BUBBLE FACTORY</div>
+            <div class="cart">
+                <a href="cart.html" class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                    <span id="cart-count">0</span></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="menu">Our Bubble Kits</div>
+        <div class="product-grid">
+            <div class="product" data-id="1" data-price="2000">
+                
+                
+                <h3>Bubble Tea Kit</h3>
+                <img src="images/product1.jpg" alt="Product 1">
+                <div class=desc>3 X TAPIOCA PEARL PACKET (60 G EACH)<br>
+
+                    3 X BROWN SUGAR PACKET (15 G EACH)<br>
+                    
+                    1 X FLAVOR 1 BLEND (30 G)<br>
+                    
+                    1 X FLAVOR 2 BLEND (30 G)<br>
+                    
+                    1 X FLAVOR 3 BLEND (30 G)<br>
+                    
+                    3 X BUBBLE TEA STRAW<br>
+                    
+                    1 X INSTRUCTIONS LEAFLET
+                </div>
+                <p class="price">PKR 2000 each</p>
+            
+                <!-- <div class="overlay" style="display: none;"></div> -->
+                
+                <h4>Select Up to 3 Flavors</h4>
+                <div class="choose-flav">
+                    <label><input type="checkbox" name="flavors" value="TARO"> TARO</label>
+                    <label><input type="checkbox" name="flavors" value="MATCHA"> MATCHA</label>
+                    <label><input type="checkbox" name="flavors" value="LATTE"> LATTE</label>
+                    <label><input type="checkbox" name="flavors" value="CHOCOLATE"> CHOCOLATE</label>
+                    <label><input type="checkbox" name="flavors" value="VANILLA"> VANILLA</label>
+                    <label><input type="checkbox" name="flavors" value="STRAWBERRY"> STRAWBERRY</label>
+                    <label><input type="checkbox" name="flavors" value="BROWN SUGAR"> BROWN SUGAR</label>
+                    <label><input type="checkbox" name="flavors" value="COCONUT"> COCONUT</label>
+                    <label><input type="checkbox" name="flavors" value="HONEY DEW"> HONEY DEW</label>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+                
+                <!-- <button class="add-to-cart">Add to Cart</button> -->
+            <div class="product" data-id="2" data-price="30">
+                <img src="images/product2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$30.00</p>
+                <input type="number" class="quantity" min="1" value="1">
+                <button class="choice">Choose From Flavors</button>
+            </div>
+            <!-- Add more products here -->
+        </div>
+    </main>
+  
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+/* styles.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color:#444;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ccc;
+    color: #444;
+    padding: 1em;
+    text-align: center;
+}
+
+header nav {
+    margin:2em 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    /* margin: 0.7em 0; */
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav a:hover {
+    cursor:pointer;
+}
+
+.title{
+    font-size: 3em;
+    font-weight:700;
+
+}
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    fill:#444;
+    width:1.7em;
+    height:1.7em;
+}
+#cart-count{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #444;
+    color: white;
+    border-radius: 50%;
+    width: 1.7em;
+    height: 1.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.3em;
+    font-weight: bold;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    color: #444;
+    /* padding: 1em; */
+}
+
+.dropbtn{
+    width:1.7em;
+    height:1.7em;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ccc;
+    font-size: 1em;
+    color:#444;
+    width: 20em;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 0;
+}
+.dropdown-content a {
+    color: #444;
+    padding: 1em 1.3em;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+.box{
+    padding: 1em;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.checkout-container{
+    width:50%;
+    padding: 3em;
+
+}
+.menu {
+    margin:2em;
+    text-align: center;
+    font-size: 2vw;
+}
+.product-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product {
+    width: 30em;
+    border: 0.1em dotted #ddd;
+    padding: 1em;
+    text-align: center;
+}
+
+.product img {
+    width: 6em;
+    height: auto;
+}
+
+.product .quantity {
+    width: 50px;
+    margin: 10px 0;
+}
+.desc{
+    font-weight:300;
+    font-size: 0.7em;
+}
+.price{
+    font-weight: 900;
+    font-size:0.7em;
+}
+
+.choose-flav label{
+    font-size:0.5em;
+    margin:0.5em;
+}
+.underline{
+    border-bottom: 0.1em dotted #444;
+}
+.cart-container{
+    padding:1.7em;
+    margin: 0 0 1em auto;
+    width:25%;
+    background:#ccc;
+}
+.cc{
+    text-align:right;
+
+}
+#clear-cart{
+
+    
+    cursor:pointer;
+    font-size:0.5em;
+    background:#ccc;
+    border: none;
+    outline:none;
+    color:white;
+    
+}
+#clear-cart svg{
+    width:1em;
+    height:1em;
+    fill:white;
+    vertical-align: bottom;
+}
+.amount{
+    margin:1em 0;
+}
+#final-total{
+    opacity:0.7;
+    float: right;
+    font-size:0.7em;
+    font-weight:bold;
+}
+.item{
+    padding: 0.5em 0;
+    border-bottom:0.1em solid #444;
+}
+.item p{
+    margin:0;
+    padding:0;
+}
+.price{
+    opacity:0.7;
+    float:right;
+}
+.flavors{
+    
+    opacity:0.7;
+    font-size: 0.7em;
+    /* float:right; */
+}
+
+.product .add-to-cart {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product .add-to-cart.added {
+    background-color: #28a745;
+}
+
+.product .add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+.product .add-to-cart.added:hover {
+    background-color: #218838;
+}
+.order-form p{
+    margin-top:1.5em;
+
+    font-weight: 700;
+}
+.order-form button{
+    font-size: 1em;
+    display:block;
+    margin-top:3em;
+    padding: 1em;
+    width: 50%;
+    float:right;
+    background-color: #444;
+    color:white;
+    border: 0.1em solid #444;
+    border-radius: 0.3em;;
+}
+.order-form .form-contact{
+    border: none;
+    margin-bottom:2em;
+}
+.form-contact input{
+    width: 45%;
+}
+.form-address input{
+    width:100%;
+}
+.order-form label{
+    font-size: 0.7em;
+    font-weight:700;
+    opacity: 0.5;
+}
+
+.order-form svg{
+    width:1.3em;
+    height: 1.3em;
+    fill: #444;
+    vertical-align:bottom;
+}
+.order-form div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.order-form input{
+
+    border-radius: 0.3em;
+    vertical-align: bottom;
+    padding: 0.5em;
+
+    border: 0.1em solid #ccc;
+}
+.order-form input:focus{
+    border: 0.1em solid orange;
+    outline:none;
+}
+
+
+@media screen and (max-width: 800px) {
+    
+    .dropdown-content{
+        width: 100%;
+        font-size: 1em;
+
+    }
+    .dropdown-content a{
+        text-align:center;
+    }
+   
+
+ 
+}
