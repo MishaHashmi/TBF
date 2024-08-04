@@ -48,7 +48,7 @@ function updateCartPage() {
                 <p>${item.name}  <span class="quant">    x ${item.quantity}</span>   <span class="price">PKR ${(item.price*item.pearls+item.price*item.packs)*item.quantity}</span></p>
                 <p class="flavors">${item.pearls} Tapioca Pearl Packs</p>
                 <p class="flavors">${item.packs} Flavor Packs</p>
-                <p class="flavors">Flavors:   ${item.flavors.join(', ')}</p>
+                <p class="flavors">${item.flavors.join(', ')}</p>
                 </div>
             `;
             cartItemsDiv.appendChild(itemDiv);
@@ -160,10 +160,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const now = new Date();
                 const orderNo=Math.floor(Math.random() * (999999 - 111111 + 1)) + 111111;
                 
+                
+                const bubbleKits=[];
+                const customKits=[];
+                cartItems.forEach(item => {
+                    if(item.id == 1){
+                        bubbleKits.push([item.name, "quantity:", item.quantity, item.flavors])
+                    }
+                    if(item.id == 2){
+                        customKits.push([item.name, "quantity:", item.quantity, "pearl packs:",item.pearls, "flavors:", item.packs ,item.flavors])
+                    }
+                    
+                });
+                addHiddenField(form, 'bubbleKits', JSON.stringify(bubbleKits));
+                addHiddenField(form, 'customKits', JSON.stringify(customKits));
 
-        
-                addHiddenField(form, 'cartItems', cartItems);
-                addHiddenField(form, 'total', orderAmount);
+                addHiddenField(form, 'orderAmount', orderAmount);
                 addHiddenField(form, 'time', now);
                 addHiddenField(form, 'orderNo', orderNo);
                 
@@ -175,10 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // localStorage.setItem("orderSummary", JSON.stringify(mapObject));
                 // const retr = JSON.parse(localStorage.getItem("orderSummary"));
                 // const m = new Map(Object.entries(retr));
-                // console.log();
-                // return;
-                // const data = new FormData(form);
-                // const action = e.target.action;
+                
                 fetch(scriptURL, {
                     method: 'POST',
                     body: new FormData(form)
@@ -209,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
                     loadingDiv.classList.remove('show'); 
 
-                    // window.location.href = 'summary.html';
+                    window.location.href = 'summary.html';
                     
                     
                 })
@@ -438,6 +447,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     }
+
+   
 
    
 });
