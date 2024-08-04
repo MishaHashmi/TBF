@@ -1,10 +1,75 @@
 /* styles.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+
+
+h3{
+    font-size: 1.7em;
+ }
+ .underline{
+    border-bottom: 0.1em dotted #444;
+}
+.center{
+    text-align: center;
+}
 body {
     font-family: 'Poppins', sans-serif;
     color:#444;
     margin: 0;
     padding: 0;
+   
+}
+
+
+.pattern{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    height:100%;
+    z-index :-99;
+    /* background-image: url('images/pattern.svg'); */
+    background-repeat: repeat; /* Repeat the SVG */
+    background-size: 45vw 45vw; /* Set the size of the background image */
+    background-position: top left; /* Position the background image */
+    filter:grayscale(50%)
+}
+.pattern::after{
+    content:"";
+    position: absolute; /* Absolute positioning */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    background-color: rgba(128, 128, 128, 0.3);
+    z-index:-98;
+}
+
+.window{
+    width: 100%;
+    height: 10vw;
+    box-sizing: border-box;
+}
+main{
+    box-sizing: border-box;
+    padding: 2em 0;
+    background-color: white;
+}
+
+button{
+    font-size: 1em;
+    padding:0.5em 3em;
+    background-color: #444;
+    color:white;
+    border: 0.1em solid #444;
+    border-radius: 0.3em;;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+button:hover{
+    background-color: white;
+    color:#444;
 }
 
 header {
@@ -15,12 +80,13 @@ header {
 }
 
 header nav {
-    margin:2em 0;
+    margin:2em;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    vertical-align: middle;
     /* margin: 0.7em 0; */
 }
 
@@ -94,28 +160,14 @@ header nav a:hover {
     background-color: #f1f1f1;
 }
 
-.show {
-    display: block;
-}
 
-.box{
-    box-sizing: border-box;
-    padding: 1em;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
 
-.checkout-container{
-    width:60%;
-    padding: 3em;
-    box-sizing: border-box;
+/* Order Page */
 
-}
 .menu {
     margin:2em;
     text-align: center;
-    font-size: 2vw;
+    font-size: 2.5em;
 }
 .product-grid {
     display: flex;
@@ -140,22 +192,120 @@ header nav a:hover {
     width: 50px;
     margin: 10px 0;
 }
+
+
 .desc{
     font-weight:300;
     font-size: 0.7em;
 }
-.price{
+.product .price{
     font-weight: 900;
     font-size:0.7em;
+    
 }
 
-.choose-flav label{
+.flavor, .pearl, .kit{
+    border: 0.1em dotted #ccc;
+}
+/* .kit > div:not(:first-child){
+    display: inline-block;
+    margin-left: 1em;
+} */
+
+.choose-flav{
+    display:none;
+    margin-bottom:2em;
+}
+.choose-flav h4{
+    margin-bottom:0;
+}
+/* .choose-flav label{ */
+label{
     font-size:0.5em;
-    margin:0.5em;
+    /* margin:0.5em; */
+    
 }
-.underline{
-    border-bottom: 0.1em dotted #444;
+
+
+.selected-flav {
+    display: none;
+    margin-bottom:2em;
 }
+.flavor-block {
+    display: inline-block;
+    margin: 1em;
+    text-align: center;
+    font-size: 0.7em;;
+    
+}
+.flavors-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+.avail-flav{
+    margin-bottom:0;
+    text-align:center;
+}
+
+
+h6{
+    margin-bottom: 0;
+}
+
+
+.popover {
+ 
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0,0,0,0.5);
+
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: none; 
+}
+
+.popover-content{
+    position: fixed;
+    top: 50%; /* Moves the top edge to the middle of the viewport */
+    left: 50%; /* Moves the left edge to the middle of the viewport */
+    
+    transform: translate(-50%, -50%);
+    background-color: #ccc;
+    padding:2em;
+
+}
+.popover h3 {
+    margin: 1em;
+
+}
+
+
+
+
+
+
+/* Cart Page */
+.box{
+    box-sizing: border-box;
+    padding: 1em;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.checkout-container{
+    width:60%;
+    padding: 3em;
+    box-sizing: border-box;
+}
+
+
 .cart-container{
     padding:1.7em;
     margin: 0 0 1em auto;
@@ -163,36 +313,19 @@ header nav a:hover {
     background:#ccc;
     box-sizing: border-box;
 }
-.cc{
-    text-align:right;
 
-}
-#clear-cart{
-
-    
-    cursor:pointer;
-    font-size:0.5em;
-    background:#ccc;
-    border: none;
-    outline:none;
-    color:white;
-    
-}
-#clear-cart svg{
-    width:1em;
-    height:1em;
-    fill:white;
-    vertical-align: bottom;
-}
 .amount{
+    border-top: 0.1em dotted #444;
     margin:1em 0;
 }
-#final-total{
+.money{
     opacity:0.7;
     float: right;
     font-size:0.7em;
     font-weight:bold;
 }
+
+
 .item{
     padding: 0.5em 0;
     border-bottom:0.1em solid #444;
@@ -201,9 +334,17 @@ header nav a:hover {
     margin:0;
     padding:0;
 }
-.price{
+.cart-container .price{
     opacity:0.7;
+    font-size: 0.7em;
     float:right;
+    font-weight:bold;
+}
+.cart-container .quant{
+    opacity:0.7;
+    font-size: 0.7em;
+    /* font-weight:bold; */
+    padding-left:1em;
 }
 .flavors{
     
@@ -212,51 +353,33 @@ header nav a:hover {
     /* float:right; */
 }
 
-.product .add-to-cart {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.product .add-to-cart.added {
-    background-color: #28a745;
-}
-
-.product .add-to-cart:hover {
-    background-color: #0056b3;
-}
-
-.product .add-to-cart.added:hover {
-    background-color: #218838;
-}
 .order-form p{
     margin-top:1.5em;
 
     font-weight: 700;
 }
-.order-form button{
+.order-form .confirm-submit{
     font-size: 1em;
-    display:block;
-    margin-top:3em;
-    padding: 1em;
+    display: block;
+    margin-top:2em;
+    padding: 1em; 
     width: 50%;
     float:right;
     background-color: #444;
     color:white;
     border: 0.1em solid #444;
-    border-radius: 0.3em;;
+    border-radius: 0.3em;
 }
+
 .order-form .form-contact{
     border: none;
     margin-bottom:2em;
 }
-.form-contact input{
-    width: 45%;
+.form-address input, .form-contact input{
+    width: 47%;
 }
-.form-address input{
+.form-address input[name="address-street"]{
     width:100%;
 }
 .order-form label{
@@ -269,12 +392,14 @@ header nav a:hover {
     width:1.3em;
     height: 1.3em;
     fill: #444;
-    vertical-align:bottom;
+    vertical-align: sub;
 }
-.order-form div{
+.order-form .flex{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
+    flex :1 1;
 }
 .order-form input{
 
@@ -284,14 +409,133 @@ header nav a:hover {
 
     border: 0.1em solid #ccc;
 }
+.order-form input:disabled::placeholder{
+    color:#444;
+}
 .order-form input:focus{
     border: 0.1em solid orange;
     outline:none;
 }
 
 
-@media screen and (max-width: 800px) {
+input.blurred:invalid {
+    border-color: red;
+
+}
+
+select{
+        min-width: 5em;
+      padding:0.3em 1em;
+      border: 0.1em solid #ccc;
+      border-radius: 0.3em;
+      background-color: transparent;
+      font-size: 0.7em;
+      color: #444;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+      background-position: right 1em center;
+      background-repeat: no-repeat;
+      background-size: 1em 1em;
+      appearance: none; /* Remove default styling */
+      -webkit-appearance: none; /* Remove default styling in WebKit browsers */
+      -moz-appearance: none; /* Remove default styling in Firefox */
+
+}
+select:focus{
+    border-color: orange;
+    outline:none;
+}
+
+
+
+
+
+textarea{
+    padding:5em;
+      border: 0.1em solid #ccc;
+      border-radius: 0.3em;
+      background-color: transparent;
+      font-size: 0.7em;
+      appearance: none; /* Remove default styling */
+      -webkit-appearance: none; /* Remove default styling in WebKit browsers */
+      -moz-appearance: none; /* Remove default styling in Firefox */
+}
+
+
+.cc{
+    text-align:right;
+
+}
+.cancel{
+    padding: 1em;
+    cursor:pointer;
+    font-size:0.5em;
+    background:#ccc;
+    border: none;
+    outline:none;
+    color:white;
+    box-sizing: border-box;
+    transition: 0.3s;
     
+}
+.cancel:hover{
+ 
+    background-color: white;
+    color: #ccc;
+}
+.cancel svg{
+    width:1em;
+    height:1em;
+    fill:white;
+    vertical-align: bottom;
+}
+.cancel:hover svg{
+
+    fill:#ccc;
+}
+
+
+.loading{
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3vw;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    z-index: 99999;
+    text-align: center;
+    display: none;
+}
+.loading svg{
+    width:10vw;
+    height:10vw;
+    fill: white;
+    animation: rotate 2s ease-in-out infinite;
+}
+
+.show {
+    display: block;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(45deg);
+    }
+    75%{
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .title{
+        font-size: 2em;
+    }
     .dropdown-content{
         width: 100%;
         font-size: 1em;
