@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Update cart page on load if on cart.html
-    if (window.location.pathname.includes('cart.html')) {
+    if (window.location.pathname.includes('cart')) {
         updateCartPage();
 
 
@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.removeItem('cartItems');
                     localStorage.setItem('cartCount', '0');
                     localStorage.setItem('orderAmount', '0');
+                    localStorage.setItem('kit', '0');
 
                     form.reset(); // Clear form fields
                     updateCartIcon();
@@ -238,14 +239,25 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('cartItems');
             localStorage.setItem('cartCount', '0');
             localStorage.setItem('orderAmount', '0');
+            localStorage.setItem('kit', '0');
             updateCartIcon();
             updateCartPage(); // Clear cart items display
             alert('Cart cleared!');
         });
     }
 
-    if (window.location.pathname.includes('order.html')) {
-
+    if (window.location.pathname.includes('order')) {
+        const kit = parseInt(localStorage.getItem('kit') || '0');
+        const kitDiv = document.querySelector('.kit');
+        const fullDiv = document.querySelector('.full');
+        if(kit){
+            kitDiv.classList.remove('show');
+            fullDiv.classList.add('show');
+        }
+        else{
+            kitDiv.classList.add('show');
+            fullDiv.classList.remove('show');
+        }
 
 
 
@@ -311,9 +323,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         }
                         localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                        localStorage.setItem('kit', '1');
+                        // const kitDiv = document.querySelector('.kit');
+                        kitDiv.classList.remove('show');
+                        fullDiv.classList.add('show');
+
 
 
                          // Reset select elements
+                        // console.log(chooseFlavs.querySelectorAll('select[name="flavors"]'));
                         chooseFlavs.querySelectorAll('select[name="flavors"]').forEach(select => {
                             select.selectedIndex = 0;
                         });
@@ -372,9 +390,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     
                     // Reset select elements
-                    productDiv.querySelectorAll('select[name="flavors"]').forEach(select => {
+                    
+                    // console.log(productDiv.querySelectorAll('select'));
+                    productDiv.querySelectorAll('select').forEach(select => {
                         select.selectedIndex = 0;
                     });
+
+                    const event = new Event('change', { bubbles: true, cancelable: true });
+                    document.getElementById('flavor-packs').dispatchEvent(event);
+                    
 
                 }
 
@@ -393,26 +417,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         document.getElementById('flavor-packs').addEventListener('change', function() {
+            // console.log('Change event triggered');
             const selectedValue = parseInt(this.value, 0);
+            
             // console.log(this);
             const selectedFlavs = document.querySelectorAll('.selected-flav');
 
-            if (selectedValue > 0) {
+            
 
-                selectedFlavs.forEach((element) => {
-                    // Access data-id attribute using dataset
-                    const dataId = element.dataset.id;
-                
-                    // Compare dataId with the desired value
-                    if (dataId <= selectedValue) {
-                        element.classList.add('show');
-                    }
-                    else{
-                        element.classList.remove('show');
-                    }
-                });
+            selectedFlavs.forEach((element) => {
+                // Access data-id attribute using dataset
+                const dataId = element.dataset.id;
+            
+                // Compare dataId with the desired value
+                if (dataId <= selectedValue) {
+                    element.classList.add('show');
+                }
+                else{
+                    element.classList.remove('show');
+                }
+            });
              
-            }
 
 
         });
@@ -422,23 +447,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // console.log(this);
             const chooseFlavs = document.querySelectorAll('.choose-flav');
 
-            if (selectedValue > 0) {
+           
 
-                chooseFlavs.forEach((element) => {
-                    // console.log(element);
-                    // Access data-id attribute using dataset
-                    const dataId = element.dataset.id;
-                
-                    // Compare dataId with the desired value
-                    if (dataId <= selectedValue) {
-                        element.classList.add('show');
-                    }
-                    else{
-                        element.classList.remove('show');
-                    }
-                });
-             
-            }
+            chooseFlavs.forEach((element) => {
+                // console.log(element);
+                // Access data-id attribute using dataset
+                const dataId = element.dataset.id;
+            
+                // Compare dataId with the desired value
+                if (dataId <= selectedValue) {
+                    element.classList.add('show');
+                }
+                else{
+                    element.classList.remove('show');
+                }
+            });
+            
+            
 
 
         });

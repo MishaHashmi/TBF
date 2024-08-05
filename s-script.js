@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    if (window.location.pathname.includes('summary.html')) {
+    if (window.location.pathname.includes('summary')) {
 
         const orderSummary = JSON.parse(localStorage.getItem("orderSummary"));
         const order = new Map(Object.entries(orderSummary));
