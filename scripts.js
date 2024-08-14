@@ -1,5 +1,20 @@
 // scripts.js
-const deliveryFee =200;
+
+
+allFlavors = ["TARO", "MATCHA", "LATTE", "CHOCOLATE", "VANILLA", "STRAWBERRY", "BROWN SUGAR", "COCONUT", "HONEY DEW", "RED VELVET"];
+kitPrice = 2000;
+packPrice = 400;
+deliveryFee = 200;
+
+    
+
+
+
+
+
+
+
+
 // Utility to update cart icon
 function updateCartIcon() {
     // localStorage.setItem('cartCount',0);
@@ -30,7 +45,6 @@ function updateCartPage() {
         cartItemsDiv.innerHTML = ''; // Clear existing items
 
         cartItems.forEach(item => {
-            // finalTotal += item.price * item.quantity;
             const itemDiv = document.createElement('div');
             if(item.id == 1){
                 itemDiv.innerHTML = `
@@ -69,6 +83,9 @@ function updateCartPage() {
 document.addEventListener('DOMContentLoaded', () => {
     
     updateCartIcon();
+    
+    
+
 
     
    
@@ -135,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // Handle form submission //order placement
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz4yENtbFr289ZISe4n9LXdziYVj1VWQWNPFxyrSsvRN35jKTMhe0zE_X58dXTQEkP3/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDIfXDIf40GbPPU-s5TDQfGpB-LQAyiPG3CMTdBVpKs4rlnLk6CwhH_vJv8eGhhxW9/exec'
         const form = document.forms['submit-to-google-sheet']
         
 
@@ -232,6 +249,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             });
 
+
+            
+
+
+        
+
         
         
             // Handle clearing the cart
@@ -247,6 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (window.location.pathname.includes('order')) {
+        
         const kit = parseInt(localStorage.getItem('kit') || '0');
         const kitDiv = document.querySelector('.kit');
         const fullDiv = document.querySelector('.full');
@@ -258,6 +282,33 @@ document.addEventListener('DOMContentLoaded', () => {
             kitDiv.classList.add('show');
             fullDiv.classList.remove('show');
         }
+
+        const flavorsContainerDiv = document.querySelector(".flavors-container");
+        flavorsContainerDiv.innerHTML='';
+        allFlavors.forEach(item =>{
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flavor-block";
+            itemDiv.textContent = item;
+            flavorsContainerDiv.appendChild(itemDiv);
+
+        });
+
+
+        const flavorsDivs = document.querySelectorAll(".flavors");
+        flavorsDivs.forEach(flavorDiv => {
+            flavorDiv.innerHTML = ''; // Clear existing content
+            allFlavors.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                flavorDiv.appendChild(option);
+            });
+        });
+
+
+        
+        
+
 
 
 
@@ -444,7 +495,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('kits').addEventListener('change', function() {
             const selectedValue = parseInt(this.value, 0);
-            // console.log(this);
             const chooseFlavs = document.querySelectorAll('.choose-flav');
 
            
