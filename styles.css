@@ -124,7 +124,7 @@ body {
 
 
 .boba {
-    /* position: relative;  */
+    position: relative; 
     display: flex;
     align-items: center;
     overflow:visible;
@@ -134,6 +134,9 @@ body {
 }
 
 .boba-desc{
+    display: flex;
+    align-items: center;
+    transform: translate(-50%, -50%);
     z-index: 3;
     width: 100%;
     height: 100%;
@@ -142,30 +145,30 @@ body {
     font-size: 2.5em;
     font-weight: bold;
     
-    padding-top: 1.7em;
+
 
 }
 .boba .b1{
-    padding-left: 0.2em;
-    padding-top: 3.3em;
-    text-align: left;
+    margin-bottom: 1em;
+    justify-content: flex-end;
 }
 
 .boba .b2{
-
-    padding-right: 0.2em;
-    text-align: right;
+    margin-top: 1em;
+    justify-content: flex-start;
 }
 
-.boba img{
+.bi1 img{
     z-index: 1;
-    filter: brightness(0.7);
-    animation: slideUpAndDown 10s ease-in-out infinite;
+    filter: brightness(0.5);
+    animation: slideUpAndDown1 10s ease-in-out infinite;
 
 }
 
 .bi2 img{
-    animation-delay: 2s;
+    z-index: 1;
+    filter: brightness(0.5);
+    animation: slideUpAndDown2 10s ease-in-out infinite;
 }
 
 .bi1 .boba-desc{
@@ -176,7 +179,6 @@ body {
 .bi2 .boba-desc{
     position: absolute;
     animation: changeColor2 10s ease-in-out infinite;
-    animation-delay: 2s;
 }
 
 @keyframes changeColor{
@@ -191,17 +193,17 @@ body {
     }
 }
 @keyframes changeColor2{
-    0%, 10%, 90%, 100%{
+    0%, 20%, 90%, 100%{
         color: #a3ccac;
         transform: translateX(0); 
     }
-    30%, 70%{
+    40%, 70%{
         color: #444;
         transform: translateX(-20%); 
     }
 }
 
-@keyframes slideUpAndDown {
+@keyframes slideUpAndDown1 {
     0%, 10% {
         transform: translateY(0); 
         opacity: 1;
@@ -212,6 +214,24 @@ body {
     }
     70% {
         transform: translateY(100%); 
+        opacity: 0;
+    }
+    90%, 100% {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+}
+@keyframes slideUpAndDown2 {
+    0%, 10% {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(100%); 
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(-100%); 
         opacity: 0;
     }
     90%, 100% {
@@ -294,7 +314,7 @@ body {
     flex-direction: row;
     gap:1em;
     align-items: center;
-    font-weight: 100;
+    font-weight: 200;
 }
 .contact-info svg{
     width:1.5em;
@@ -650,17 +670,7 @@ h6{
     border-radius: 0.3em;
 }
 
-.order-form .form-contact{
-    border: none;
-    margin-bottom:2em;
-}
-.form-address input, .form-contact input{
-    margin: 0.5em 0;
-    width: 45%;
-}
-.form-address input[name="address-street"]{
-    width:100%;
-}
+
 .order-form label{
     font-size: 0.7em;
     font-weight:700;
@@ -698,9 +708,40 @@ h6{
 }
 
 
+.order-form .form-contact{
+    
+    border: none;
+    
+}
+
+.form-contact .input-container{
+    position: relative;
+    margin-top:0.5em;
+    width: 45%;
+}
+.form-contact label{
+    position: absolute;
+    top:-1em;
+    font-size: 0.5em;
+    margin:0;
+    display:none;
+}
+.form-address input{
+    
+    margin: 0.5em 0;
+    width: 45%;
+}
+.form-address input[name="address-street"], .form-contact input{
+    width:100%;
+}
+
+
 input.blurred:invalid {
     border-color: red;
 
+}
+input.blurred:invalid ~ label {
+    display: block; 
 }
 
 select{
@@ -822,7 +863,7 @@ textarea{
     .boba-desc{
         padding-left: 0;
         padding-right: 0;
-        font-size: 1.7em;
+        font-size: 2em;
     }
 }
 
@@ -837,6 +878,13 @@ textarea{
     }
     nav{
         margin:0.5em;
+    }
+    .contact-info{
+        font-size: 0.7em;
+    }
+    .contact-info svg{
+        width: 1em;
+        height:1em;
     }
 
     .flavor-container{
@@ -869,7 +917,7 @@ textarea{
     .boba-desc{
         padding-left: 0;
         padding-right: 0;
-        font-size: 5vw;
+        font-size: 2em;
     }
 
 
@@ -891,6 +939,12 @@ textarea{
         width:100%;
         margin: 0;
         padding: 1em;
+    }
+    .popover-content{
+        padding: 1em;
+    }
+    .popover h3{
+        font-size: 1em;
     }
    
 

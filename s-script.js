@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.location.pathname.includes('summary')) {
 
-        const orderSummary = JSON.parse(localStorage.getItem("orderSummary"));
+        const orderSummary = JSON.parse(sessionStorage.getItem("orderSummary"));
         const order = new Map(Object.entries(orderSummary));
         console.log(order);
 
@@ -81,12 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const amount = order.get('orderAmount');
         document.querySelector('.Amount').textContent = `PKR ${amount}`;
-
-
-
-
-
-
 
 
     }

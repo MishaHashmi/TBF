@@ -109,13 +109,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     var inputs = document.querySelectorAll('input[required]');
-      
-      inputs.forEach(function(input) {
+
+    inputs.forEach(function(input) {
         input.addEventListener('blur', function() {
-          input.classList.add('blurred');
+            if (!input.checkValidity()) {
+                // input.labels.forEach(function(label) {
+                //     label.style.display = 'block';
+                // });
+                input.classList.add('blurred');
+            } else {
+                // input.labels.forEach(function(label) {
+                //     label.style.display = 'none';
+                // });
+                input.classList.remove('blurred');
+            }
         });
-      });
-    
+    });
 
       
     
@@ -138,9 +147,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Update cart page on load if on cart.html
+
     if (window.location.pathname.includes('cart')) {
         updateCartPage();
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted,
+              perf = window.performance,
+              perfEntries =
+                perf && perf.getEntriesByType && perf.getEntriesByType("navigation"),
+              perfEntryType = perfEntries && perfEntries[0] && perfEntries[0].type,
+              navigationType = perf && perf.navigation && perf.navigation.type;
+            if (
+              historyTraversal ||
+              perfEntryType === "back_forward" ||
+              navigationType === 2 
+            ) {
+              // Handle page restore.
+              window.location.reload();
+            }
+        });
 
 
         // Confirm submit popover
@@ -238,16 +263,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     orderSummary.set("orderAmount", orderAmount+deliveryFee);
                     orderSummary.set("cartItems", cartItems);
                     const mapObject = Object.fromEntries(orderSummary);
-                    localStorage.setItem("orderSummary", JSON.stringify(mapObject));
+                    sessionStorage.setItem("orderSummary", JSON.stringify(mapObject));
 
                     localStorage.removeItem('cartItems');
-                    localStorage.setItem('cartCount', '0');
-                    localStorage.setItem('orderAmount', '0');
-                    localStorage.setItem('kit', '0');
+                    localStorage.removeItem('cartCount');
+                    localStorage.removeItem('orderAmount');
+                    localStorage.removeItem('kit');
 
-                    form.reset(); // Clear form fields
+                    form.reset();
                     updateCartIcon();
-                    updateCartPage(); // Clear cart items display
+                    updateCartPage();
     
                     loadingDiv.classList.remove('show'); 
 
@@ -285,6 +310,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (window.location.pathname.includes('order')) {
+
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted,
+              perf = window.performance,
+              perfEntries =
+                perf && perf.getEntriesByType && perf.getEntriesByType("navigation"),
+              perfEntryType = perfEntries && perfEntries[0] && perfEntries[0].type,
+              navigationType = perf && perf.navigation && perf.navigation.type;
+            if (
+              historyTraversal ||
+              perfEntryType === "back_forward" ||
+              navigationType === 2 
+            ) {
+              // Handle page restore.
+              window.location.reload();
+            }
+        });
         
         const kit = parseInt(localStorage.getItem('kit') || '0');
         const kitDiv = document.querySelector('.kit');
@@ -335,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const productName = productDiv.querySelector('h3').textContent;
                 const productPrice = productDiv.getAttribute('data-price');
                 const popover =productDiv.querySelector('.popover');
-                popover.classList.add('show');
+                
 
                 let quantity = 0;
                 let pearls = 0;
@@ -343,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
 
                 if (productId == 1){
+                    popover.classList.add('show');
                     // console.log(productId);
                     quantity= Number(productDiv.querySelector('#kits').value);
                     // console.log(quantity);
@@ -413,6 +456,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (productId == 2){
                     pearls = productDiv.querySelector("#pearl-packs").value;
                     packs = productDiv.querySelector("#flavor-packs").value;
+                    if(pearls == 0 && packs ==0){
+                        return;
+                    }
+                    popover.classList.add('show');
                     const elements= productDiv.querySelectorAll('.selected-flav.show');
 
                     const selectedFlavors = Array.from(elements).map(element => {
