@@ -117,10 +117,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     
 
+      
     
 
 
-    
+      if (typeof on_index !== 'undefined' && on_index === true) {
+        document.querySelector('.instruct-toggle').addEventListener('click', function () {
+            const content = document.querySelector('.instruct-content');
+            const icon = document.querySelector('.instruct-icon');
+        
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                icon.classList.remove('rotate');
+            } else {
+                content.classList.add('show');
+                icon.classList.add('rotate');
+            }
+        });
+
+    }
 
 
     // Update cart page on load if on cart.html

@@ -1,11 +1,14 @@
 /* styles.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,400&display=swap');
 
 
 
 h3{
     font-size: 1.7em;
+ }
+ ul{
+    list-style-type: square;
  }
  .underline{
     border-bottom: 0.1em dotted #444;
@@ -45,8 +48,8 @@ body {
 
 .flavor-item {
     display: flex;
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
     position: relative;
 
     text-align: center; 
@@ -70,10 +73,6 @@ body {
     bottom: 0;
     object-fit: cover;
     transition: 1s;
-    /* -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-	transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: scale(1.15);
-	transform: scale(1.15); */
     
 }
 
@@ -105,18 +104,18 @@ body {
     transform: translate3d(0,150%,0);
     opacity: 0;
 }
-.flavor-item:hover img{
+.flavor-item:hover img, .flavor-item:focus img{
     -webkit-transform: scale(1.15);
 	transform: scale(1.15); 
 }
-.flavor-item:hover .flavor-description{
+.flavor-item:hover .flavor-description, .flavor-item:focus .flavor-description{
     opacity: 1;
     transition: 1s;
     padding-top: 1em;
     -webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
-.flavor-item:hover .flavor-details{
+.flavor-item:hover .flavor-details, .flavor-item:focus .flavor-details{
     background-color: #44444499;
     padding-top: 5em;
     
@@ -138,15 +137,12 @@ body {
     z-index: 3;
     width: 100%;
     height: 100%;
-    /* background-color: #fff5; */
     color:#a3ccac;
     box-sizing: border-box;
     font-size: 2.5em;
     font-weight: bold;
     
     padding-top: 1.7em;
-
-    /* position: absolute; */
 
 }
 .boba .b1{
@@ -224,10 +220,99 @@ body {
     }
 }
 
+.instructions{
+    position: relative;
+    padding:  0 1em;
+}
+.instruct-content{
+
+    display: none;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto 1fr;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 1em;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+}
+.instruct-content li, .instruct-content p{
+    font-size: 0.7em;
+    font-weight: 200;
+}
+.instruct-content h5, .instruct-content ul{
+    margin: 0;
+}
+.instruct-content h6{
+    margin: 0;
+    opacity: 0.5;
+
+}
+
+.instruct-content.show{
+    display: grid;
+    max-height: max-content;
+}
+.instruct-icon{
+    /* min-width: 5em; */
+    transition: transform 0.3s linear;
+}
+.instruct-icon.rotate{
+    transform: rotate(90deg);
+}
+.instructions button, .order button{
+    background-color: white;
+    outline:none;
+    border:none;
+}
+.instructions svg, .order svg{
+    width:1em;
+    height:1em;
+    fill:#444;
+    vertical-align: bottom;
+}
+.order{
+    position: relative;
+    padding:0 1em;
+}
+.order-img img{
+    position: absolute;
+    top:0;
+    right: 2em;
+    height: 10vw;
+    width:10vw;
+    object-fit: cover;
+}
 
 
-
-
+.contact-info{
+    /* text-align: center; */
+    background-color: #444;
+    padding: 2em 1em;
+    color:white;
+    display:flex;
+    flex-direction: row;
+    gap:1em;
+    align-items: center;
+    font-weight: 100;
+}
+.contact-info svg{
+    width:1.5em;
+    height:1.5em;
+    fill: white;
+    vertical-align: bottom;
+}
+.contact-info a{
+    color: white;
+}
+.contact-info img{
+    height: 5em;
+    width:5em;
+    object-fit: cover;
+}
+.contact-info .whatsapp{
+    padding-bottom: 0.5em;
+}
 
 
 main{
