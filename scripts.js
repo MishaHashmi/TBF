@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // Handle form submission //order placement
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDIfXDIf40GbPPU-s5TDQfGpB-LQAyiPG3CMTdBVpKs4rlnLk6CwhH_vJv8eGhhxW9/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzxdrFlcLOtT899KoLbyEhegf6RyQ79eOd0nbIbqwnlTCSEmDvdkzPyom_0qRjcuwUW/exec'
         const form = document.forms['submit-to-google-sheet']
         
 
