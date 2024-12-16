@@ -2,22 +2,40 @@
 
 
 allFlavors = ["TARO", "MATCHA", "LATTE", "CHOCOLATE", "VANILLA", "STRAWBERRY", "BROWN SUGAR", "COCONUT", "HONEY DEW", "RED VELVET"];
-kitPrice = 2000;
-packPrice = 400;
-deliveryFee = 200;
+kitPrice = 3000;
+packPrice = 700;
+deliveryFee = 500;
 
     
 
 
 
+function updateOrderPage(){
+    const bubbleteaKit = document.querySelector('.product[data-id="1"]');
+    const pearlFlavorPacks = document.querySelector('.product[data-id="2"]');
+    const btKit = document.querySelectorAll('.data-id-1');
+    const pfPacks = document.querySelectorAll('.data-id-2');
+
+    if (bubbleteaKit) {
+        bubbleteaKit.dataset.price = kitPrice;  
+    }
+    if (pearlFlavorPacks) {
+        pearlFlavorPacks.dataset.price = packPrice;  
+    }
+
+    
+    btKit.forEach(span => {
+        span.textContent = kitPrice; 
+    });
+    pfPacks.forEach(span => {
+        span.textContent = packPrice; 
+    });
+
+}
 
 
-
-
-
-// Utility to update cart icon
 function updateCartIcon() {
-    // localStorage.setItem('cartCount',0);
+    
     const cartCount = localStorage.getItem('cartCount') || 0;
     document.getElementById('cart-count').textContent = `${cartCount}`;
 }
@@ -31,12 +49,17 @@ function addHiddenField(form, name, value) {
 }
 
 
-// Function to update cart page
+
 function updateCartPage() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     const orderAmount = JSON.parse(localStorage.getItem('orderAmount') || '0')
     const cartItemsDiv = document.getElementById('cart-items');
+    const moneyElement = document.getElementById('delivery-Fee');
+        
+    if (moneyElement) {
+        moneyElement.textContent = deliveryFee;
 
+    }
     
 
     
@@ -79,7 +102,7 @@ function updateCartPage() {
     }
 }
 
-// Add event listener to add items to the cart
+
 document.addEventListener('DOMContentLoaded', () => {
     
     updateCartIcon();
@@ -90,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
    
 
-    // const dropdown = document.querySelector('.dropdown');
+    document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
     const dropbtn = document.querySelector('.dropbtn');
 
@@ -99,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownContent.classList.toggle('show');
     });
 
-    // Close dropdown if clicked outside
+
     window.addEventListener('click', () => {
         if (dropdownContent.classList.contains('show')) {
             dropdownContent.classList.remove('show');
@@ -113,14 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach(function(input) {
         input.addEventListener('blur', function() {
             if (!input.checkValidity()) {
-                // input.labels.forEach(function(label) {
-                //     label.style.display = 'block';
-                // });
                 input.classList.add('blurred');
             } else {
-                // input.labels.forEach(function(label) {
-                //     label.style.display = 'none';
-                // });
                 input.classList.remove('blurred');
             }
         });
@@ -180,12 +197,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Fill checkout form')
                 return;
             }
-            popover.classList.add('show'); // Show the popover
+            popover.classList.add('show'); 
  
         });
 
         cancelButton.addEventListener('click', () => {
-            popover.classList.remove('show'); // Hide the popover
+            popover.classList.remove('show'); 
 
         });
 
@@ -252,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => {
                     console.log('Success!', response);
 
-                     //set localstorage
+                
                     const orderSummary = new Map();
                     orderSummary.set("name", form.elements['fname'].value+''+form.elements['lname'].value);
                     orderSummary.set("contact", form.elements['contact'].value);
@@ -262,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     orderSummary.set("time", now);
                     orderSummary.set("orderAmount", orderAmount+deliveryFee);
                     orderSummary.set("cartItems", cartItems);
+                    orderSummary.set("deliveryFee", deliveryFee)
                     const mapObject = Object.fromEntries(orderSummary);
                     sessionStorage.setItem("orderSummary", JSON.stringify(mapObject));
 
@@ -290,26 +308,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-            
-
-
-        
-
-        
-        
-            // Handle clearing the cart
         document.getElementById('clear-cart').addEventListener('click', () => {
             localStorage.removeItem('cartItems');
             localStorage.setItem('cartCount', '0');
             localStorage.setItem('orderAmount', '0');
             localStorage.setItem('kit', '0');
             updateCartIcon();
-            updateCartPage(); // Clear cart items display
+            updateCartPage(); 
             alert('Cart cleared!');
         });
     }
 
+
+
+
+
     if (window.location.pathname.includes('order')) {
+        updateOrderPage()
 
         window.addEventListener("pageshow", function (event) {
             var historyTraversal = event.persisted,
@@ -323,7 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
               perfEntryType === "back_forward" ||
               navigationType === 2 
             ) {
-              // Handle page restore.
               window.location.reload();
             }
         });
@@ -353,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const flavorsDivs = document.querySelectorAll(".flavors");
         flavorsDivs.forEach(flavorDiv => {
-            flavorDiv.innerHTML = ''; // Clear existing content
+            flavorDiv.innerHTML = ''; 
             allFlavors.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item;
@@ -365,11 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         
-
-
-
-
-        // Handle adding items to the cart
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', () => {
                 const productDiv = button.closest('.product');
@@ -386,21 +395,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (productId == 1){
                     popover.classList.add('show');
-                    // console.log(productId);
                     quantity= Number(productDiv.querySelector('#kits').value);
-                    // console.log(quantity);
-                    // console.log(typeof quantity);
+                    
 
 
                     for(let i=1; i<= quantity; i++){
 
-                        // Get selected flavors from the select elements
+                        
                         const chooseFlavs = productDiv.querySelector(`.choose-flav[data-id="${i}"]`);
-                        // console.log(chooseFlavs);
+                        
                         const selectedFlavors = Array.from(chooseFlavs.querySelectorAll('select[name="flavors"]'))
                         .map(select => select.value);
 
-                        // console.log(selectedFlavors);
+                        
 
 
                         const cartCount = parseInt(localStorage.getItem('cartCount') || '0') + 1;
@@ -409,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const orderAmount = parseInt(localStorage.getItem('orderAmount') || '0');
                         localStorage.setItem('orderAmount', orderAmount+Number(productPrice));
 
-                        // Save product details to cart
+                       
                         const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
                         const existingItemIndex = cartItems.findIndex(item => 
                             item.id === productId && 
@@ -417,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                         );
                         
-                        // console.log(cartItems);
+                        
                         
 
                         if (existingItemIndex >= 0) {
@@ -433,14 +440,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         localStorage.setItem('cartItems', JSON.stringify(cartItems));
                         localStorage.setItem('kit', '1');
-                        // const kitDiv = document.querySelector('.kit');
+
                         kitDiv.classList.remove('show');
                         fullDiv.classList.add('show');
 
 
 
-                         // Reset select elements
-                        // console.log(chooseFlavs.querySelectorAll('select[name="flavors"]'));
                         chooseFlavs.querySelectorAll('select[name="flavors"]').forEach(select => {
                             select.selectedIndex = 0;
                         });
@@ -476,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
                      
                 
 
-                    // Save product details to cart
+
                     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
                     const existingItemIndex = cartItems.findIndex(item => 
@@ -502,9 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     
                     
-                    // Reset select elements
                     
-                    // console.log(productDiv.querySelectorAll('select'));
                     productDiv.querySelectorAll('select').forEach(select => {
                         select.selectedIndex = 0;
                     });
@@ -518,8 +521,8 @@ document.addEventListener('DOMContentLoaded', () => {
                
 
                 setTimeout(() => {
-                    popover.classList.remove('show'); // Hide the popover
-                }, 1500); //1500 milliseconds delay
+                    popover.classList.remove('show');
+                }, 1500); 
                 
                 
 
@@ -530,19 +533,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         document.getElementById('flavor-packs').addEventListener('change', function() {
-            // console.log('Change event triggered');
+
             const selectedValue = parseInt(this.value, 0);
             
-            // console.log(this);
             const selectedFlavs = document.querySelectorAll('.selected-flav');
 
             
 
             selectedFlavs.forEach((element) => {
-                // Access data-id attribute using dataset
                 const dataId = element.dataset.id;
             
-                // Compare dataId with the desired value
                 if (dataId <= selectedValue) {
                     element.classList.add('show');
                 }
@@ -562,11 +562,8 @@ document.addEventListener('DOMContentLoaded', () => {
            
 
             chooseFlavs.forEach((element) => {
-                // console.log(element);
-                // Access data-id attribute using dataset
                 const dataId = element.dataset.id;
-            
-                // Compare dataId with the desired value
+
                 if (dataId <= selectedValue) {
                     element.classList.add('show');
                 }

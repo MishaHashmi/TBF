@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cont = order.get('contact');
         const add = order.get('address');
         const email = order.get('email');
+        const fee = order.get('deliveryFee');
 
 
         document.querySelector('.order-no').textContent = `Order # ${orderNo}`;
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.Address').textContent = `${add}`;
         document.querySelector('.Email').textContent = `${email}`;
         document.querySelector('.payment').textContent = "Cash On Delivery";
-        document.querySelector('.Delivery').textContent = ` +200`;
+        document.querySelector('.Delivery').textContent = ` +${fee}`;
 
         const cartItems = order.get('cartItems');
         console.log(cartItems);
